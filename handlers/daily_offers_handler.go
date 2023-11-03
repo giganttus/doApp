@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"doApp/models"
 	"net/http"
 	"strconv"
 
@@ -9,14 +8,7 @@ import (
 )
 
 func (h *Handlers) CreateDailyOffer(ctx *gin.Context) {
-	var newDailyOffer models.DailyOffers
-
-	if err := ctx.ShouldBind(&newDailyOffer); err != nil {
-		ctx.IndentedJSON(http.StatusBadRequest, gin.H{"response": "Bad Request"})
-		return
-	}
-
-	err := h.Services.CreateDailyOffer(ctx, newDailyOffer)
+	err := h.Services.CreateDailyOffer(ctx)
 	if err != nil {
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
