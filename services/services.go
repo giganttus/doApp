@@ -31,7 +31,7 @@ type IServices interface {
 	DeleteRestaurant(*gin.Context, int) error
 
 	// Daily Offers
-	CreateDailyOffer(*gin.Context, models.DailyOffers) error
+	CreateDailyOffer(*gin.Context) error
 	GetDailyOffers(*gin.Context) ([]models.DailyOffers, error)
 	GetDailyOffer(*gin.Context) (models.DailyOffers, error)
 	GetDailyOfferByRestaurantID(*gin.Context, int) (models.DailyOffers, error)

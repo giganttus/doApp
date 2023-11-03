@@ -47,7 +47,7 @@ func (s *Services) Login(ctx *gin.Context, input models.LoginReq) (models.LoginR
 func (s *Services) GetUsers(ctx *gin.Context) ([]models.Users, error) {
 	userID := ctx.Keys["userID"].(int)
 
-	if aA := s.Repos.AllowAccess(userID, "admin"); aA == false {
+	if aA := s.Repos.AllowAccess(userID, "admin"); !aA {
 		return nil, helpers.ErrService
 	}
 
