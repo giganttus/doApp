@@ -10,7 +10,7 @@ import (
 	"google.golang.org/api/option"
 )
 
-func UploadFile(ctx *gin.Context) (string, error) {
+func UploadFile(ctx *gin.Context, retaurantID int, currentDate string) (string, error) {
 	bucket := os.Getenv("BUCKET_NAME")
 
 	stClient, err := storage.NewClient(ctx, option.WithCredentialsFile("keys.json"))
@@ -18,14 +18,16 @@ func UploadFile(ctx *gin.Context) (string, error) {
 		return "", err
 	}
 
-	f, uploadedFile, err := ctx.Request.FormFile("file")
+	f, _, err := ctx.Request.FormFile("file")
 	if err != nil {
 		return "", err
 	}
 
 	defer f.Close()
 
-	sw := stClient.Bucket(bucket).Object(uploadedFile.Filename).NewWriter(ctx)
+	filename := fmt.Sprintf("%v_%v", retaurantID, currentDate)
+
+	sw := stClient.Bucket(bucket).Object(filename).NewWriter(ctx)
 
 	if _, err := io.Copy(sw, f); err != nil {
 		return "", err
@@ -35,9 +37,28 @@ func UploadFile(ctx *gin.Context) (string, error) {
 		return "", err
 	}
 
-	link := fmt.Sprintf("https://storage.googleapis.com/%v/%v", bucket, uploadedFile.Filename)
+	link := fmt.Sprintf("https://storage.googleapis.com/%v/%v", bucket, filename)
 	if err != nil {
 		return "", err
 	}
+
 	return link, nil
+}
+
+func DeleteFile(ctx *gin.Context, retaurantID int, currentDate string) error {
+	bucket := os.Getenv("BUCKET_NAME")
+
+	stClient, err := storage.NewClient(ctx, option.WithCredentialsFile("keys.json"))
+	if err != nil {
+		return err
+	}
+
+	filename := fmt.Sprintf("%v_%v", retaurantID, currentDate)
+
+	err = stClient.Bucket(bucket).Object(filename).Delete(ctx)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"doApp/helpers"
 	"net/http"
 	"strconv"
 
@@ -10,6 +11,11 @@ import (
 func (h *Handlers) CreateDailyOffer(ctx *gin.Context) {
 	err := h.Services.CreateDailyOffer(ctx)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}
@@ -20,6 +26,11 @@ func (h *Handlers) CreateDailyOffer(ctx *gin.Context) {
 func (h *Handlers) GetDailyOffers(ctx *gin.Context) {
 	res, err := h.Services.GetDailyOffers(ctx)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}
@@ -30,6 +41,11 @@ func (h *Handlers) GetDailyOffers(ctx *gin.Context) {
 func (h *Handlers) GetDailyOffer(ctx *gin.Context) {
 	res, err := h.Services.GetDailyOffer(ctx)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}
@@ -46,6 +62,11 @@ func (h *Handlers) GetDailyOfferByRestaurantID(ctx *gin.Context) {
 
 	res, err := h.Services.GetDailyOfferByRestaurantID(ctx, restaurantID)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}
@@ -62,6 +83,11 @@ func (h *Handlers) DeleteDailyOffer(ctx *gin.Context) {
 
 	err = h.Services.DeleteDailyOffer(ctx, dailyOfferID)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}

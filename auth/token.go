@@ -22,7 +22,7 @@ func GenerateJwt(userID int) (map[string]string, error) {
 	}).SignedString([]byte(accessKey))
 
 	if err != nil {
-		return nil, helpers.ErrAuth
+		return nil, helpers.ErrUnauthorized
 	}
 
 	return map[string]string{
@@ -37,12 +37,12 @@ func ValidateJwt(tokenParam string, tokenKey string) (jwt.MapClaims, error) {
 	})
 
 	if err != nil {
-		return nil, helpers.ErrAuth
+		return nil, helpers.ErrUnauthorized
 	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		return claims, nil
 	} else {
-		return nil, helpers.ErrAuth
+		return nil, helpers.ErrUnauthorized
 	}
 }
