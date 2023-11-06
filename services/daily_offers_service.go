@@ -3,7 +3,6 @@ package services
 import (
 	"doApp/helpers"
 	"doApp/models"
-	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -26,10 +25,8 @@ func (s *Services) CreateDailyOffer(ctx *gin.Context) error {
 		return helpers.ErrService
 	}
 
-	link, err := helpers.UploadFile(ctx)
+	link, err := helpers.UploadFile(ctx, restaurant.ID, currentDate)
 	if err != nil {
-		fmt.Println(err)
-		fmt.Println(link)
 		return helpers.ErrService
 	}
 
@@ -69,6 +66,16 @@ func (s *Services) DeleteDailyOffer(ctx *gin.Context, dailyOfferID int) error {
 	userID := ctx.Keys["userID"].(int)
 
 	if (!s.Repos.AllowAccess(userID, "admin")) && (!s.Repos.AllowAccess(userID, "moderator")) {
+		return helpers.ErrService
+	}
+
+	dailyOffer, err := s.Repos.GetDailyOfferByField("id", dailyOfferID)
+	if err != nil {
+		return helpers.ErrService
+	}
+
+	currentDate := time.Now().Format("2006-01-02")
+	if err = helpers.DeleteFile(ctx, dailyOffer.RestaurantsID, currentDate); err != nil {
 		return helpers.ErrService
 	}
 

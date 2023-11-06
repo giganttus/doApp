@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"doApp/helpers"
 	"doApp/models"
 	"net/http"
 	"strconv"
@@ -18,6 +19,11 @@ func (h *Handlers) CreateRestaurant(ctx *gin.Context) {
 
 	err := h.Services.CreateRestaurants(ctx, newRestaurant)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}
@@ -28,6 +34,11 @@ func (h *Handlers) CreateRestaurant(ctx *gin.Context) {
 func (h *Handlers) GetRestaurants(ctx *gin.Context) {
 	res, err := h.Services.GetRestaurants(ctx)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}
@@ -45,6 +56,11 @@ func (h *Handlers) UpdateRestaurant(ctx *gin.Context) {
 
 	err := h.Services.UpdateRestaurants(ctx, upResta)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}
@@ -61,6 +77,11 @@ func (h *Handlers) DeleteRestaurant(ctx *gin.Context) {
 
 	err = h.Services.DeleteRestaurant(ctx, restaurantID)
 	if err != nil {
+		if err.Error() == helpers.ErrForbidden.Error() {
+			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
+			return
+		}
+
 		ctx.IndentedJSON(http.StatusInternalServerError, gin.H{"response": err.Error()})
 		return
 	}

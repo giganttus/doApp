@@ -8,7 +8,11 @@ import (
 )
 
 func (s *Services) CreateRestaurants(ctx *gin.Context, input models.Restaurants) error {
-	/* userID := ctx.Keys["userID"].(int) */
+	userID := ctx.Keys["userID"].(int)
+
+	if !s.Repos.AllowAccess(userID, "admin") {
+		return helpers.ErrForbidden
+	}
 
 	if restauEx := s.Repos.RestaurantExists(input.Name); restauEx {
 		return helpers.ErrService
@@ -22,6 +26,12 @@ func (s *Services) GetRestaurants(ctx *gin.Context) ([]models.Restaurants, error
 }
 
 func (s *Services) UpdateRestaurants(ctx *gin.Context, input models.Restaurants) error {
+	userID := ctx.Keys["userID"].(int)
+
+	if !s.Repos.AllowAccess(userID, "admin") {
+		return helpers.ErrService
+	}
+
 	if restauEx := s.Repos.RestaurantExists(input.Name); restauEx {
 		return helpers.ErrService
 	}
@@ -35,6 +45,12 @@ func (s *Services) UpdateRestaurants(ctx *gin.Context, input models.Restaurants)
 }
 
 func (s *Services) DeleteRestaurant(ctx *gin.Context, RestaurantID int) error {
+	userID := ctx.Keys["userID"].(int)
+
+	if !s.Repos.AllowAccess(userID, "admin") {
+		return helpers.ErrService
+	}
+
 	relEx, err := s.Repos.GetRestaurantByField("id", RestaurantID)
 	if err != nil {
 		return helpers.ErrService
