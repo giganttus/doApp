@@ -12,3 +12,7 @@ var (
 	ErrForbidden    = errors.New("forbidden")
 	ErrUnauthorized = errors.New("unauthorized")
 )
+
+type ResponseBody struct {
+	Response string `json:"response"`
+}

@@ -1,0 +1,528 @@
+basePath: /api
+definitions:
+  helpers.ResponseBody:
+    properties:
+      response:
+        type: string
+    type: object
+  models.DailyOffers:
+    properties:
+      date:
+        maxLength: 100
+        type: string
+      id:
+        type: integer
+      link:
+        maxLength: 100
+        type: string
+      restaurants_id:
+        type: integer
+    type: object
+  models.LoginReq:
+    properties:
+      email:
+        maxLength: 64
+        type: string
+      password:
+        maxLength: 64
+        minLength: 8
+        type: string
+    type: object
+  models.LoginRes:
+    properties:
+      rolesId:
+        type: integer
+      token:
+        type: string
+    type: object
+  models.Restaurants:
+    properties:
+      address:
+        maxLength: 100
+        type: string
+      glink:
+        maxLength: 100
+        type: string
+      id:
+        type: integer
+      lat:
+        maximum: 100
+        type: number
+      lon:
+        maximum: 100
+        type: number
+      name:
+        maxLength: 100
+        type: string
+      users_id:
+        type: integer
+    type: object
+  models.Users:
+    properties:
+      email:
+        maxLength: 64
+        type: string
+      firstname:
+        maxLength: 64
+        type: string
+      id:
+        type: integer
+      lastname:
+        maxLength: 64
+        type: string
+      password:
+        maxLength: 64
+        minLength: 8
+        type: string
+      rolesId:
+        type: integer
+    type: object
+host: 127.0.0.1:1312
+info:
+  contact:
+    email: domagojpr@gmail.com
+    name: API Support
+  description: Rest API for mobile/web app
+  title: Daily Offer API documentation
+  version: "1.0"
+paths:
+  /dailyOffer:
+    get:
+      description: Get daily offer for logged user
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DailyOffers'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Get Daily Offer
+      tags:
+      - Daily Offer
+    post:
+      consumes:
+      - application/json
+      description: Create new daily offer
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Create Daily Offer
+      tags:
+      - Daily Offer
+  /dailyOffer/{id}:
+    get:
+      description: Delet daily offer by offer id
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DailyOffers'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Delete Daily Offer
+      tags:
+      - Daily Offer
+  /dailyOffer/{restaurantId}:
+    get:
+      description: Get daily offer by restaurant ID
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DailyOffers'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Get Daily Offer
+      tags:
+      - Daily Offer
+  /dailyOffers:
+    get:
+      description: Get list of all daily offers
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DailyOffers'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Get Daily Offers
+      tags:
+      - Daily Offer
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login service
+      parameters:
+      - description: User credentials for login
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginRes'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Login
+      tags:
+      - Users
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Create new user for app
+      parameters:
+      - description: User credentials for registration
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Users'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Create an User
+      tags:
+      - Users
+  /restaurant:
+    get:
+      description: Get list of all restaurants
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Users'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Get Restaurants
+      tags:
+      - Restaurant
+    post:
+      consumes:
+      - application/json
+      description: Create new restaurant
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Restaurant info for creation
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Restaurants'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Create Restaurant
+      tags:
+      - Restaurant
+    put:
+      description: Update existing restaurant
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Restaurant info for update
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Restaurants'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Users'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Update Restaurant
+      tags:
+      - Restaurant
+  /restaurant/{id}:
+    delete:
+      description: Delete existing restuarant by id
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Users'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Delete Restaurant
+      tags:
+      - Restaurant
+  /users:
+    get:
+      description: Get list of all users
+      parameters:
+      - description: JWT Token for Auth
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Users'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helpers.ResponseBody'
+      summary: Get Users
+      tags:
+      - Users
+swagger: "2.0"
