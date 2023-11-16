@@ -12,9 +12,10 @@ import (
 // @Summary      		Create Daily Offer
 // @Description  		Create new daily offer
 // @Tags         		Daily Offer
-// @Accept       		application/json
+// @Accept 				multipart/form-data
 // @Produce      		application/json
 // @Param		 		Authorization header string true "JWT Token for Auth"
+// @Param 				file formData file true "this is a test file"
 // @Success      		201  {object} helpers.ResponseBody
 // @Failure      		401  {object} helpers.ResponseBody
 // @Failure      		403  {object} helpers.ResponseBody
@@ -130,7 +131,7 @@ func (h *Handlers) GetDailyOfferByRestaurantID(ctx *gin.Context) {
 // @Failure      		403  {object} helpers.ResponseBody
 // @Failure      		404  {object} helpers.ResponseBody
 // @Failure      		500  {object} helpers.ResponseBody
-// @Router       		/dailyOffer/{id} [get]
+// @Router       		/dailyOffer/{id} [delete]
 func (h *Handlers) DeleteDailyOffer(ctx *gin.Context) {
 	dailyOfferID, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
