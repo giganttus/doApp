@@ -73,7 +73,7 @@ const docTemplate = `{
             "post": {
                 "description": "Create new daily offer",
                 "consumes": [
-                    "application/json"
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "application/json"
@@ -88,6 +88,13 @@ const docTemplate = `{
                         "description": "JWT Token for Auth",
                         "name": "Authorization",
                         "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "file",
+                        "description": "this is a test file",
+                        "name": "file",
+                        "in": "formData",
                         "required": true
                     }
                 ],
@@ -126,7 +133,7 @@ const docTemplate = `{
             }
         },
         "/dailyOffer/{id}": {
-            "get": {
+            "delete": {
                 "description": "Delet daily offer by offer id",
                 "tags": [
                     "Daily Offer"

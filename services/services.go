@@ -27,7 +27,7 @@ type IServices interface {
 	// Restaurants
 	CreateRestaurants(*gin.Context, models.Restaurants) error
 	GetRestaurants(*gin.Context) ([]models.Restaurants, error)
-	UpdateRestaurants(*gin.Context, models.Restaurants) error
+	UpdateRestaurant(*gin.Context, models.Restaurants) error
 	DeleteRestaurant(*gin.Context, int) error
 
 	// Daily Offers
