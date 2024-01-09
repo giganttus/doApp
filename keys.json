@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "arctic-marking-404007",
+  "private_key_id": "26ec088efb2d4eb4ac4f1ca2a403f9e75e6f3032",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDAof5Lv3wujXxt\ntqKKsfs1uKWdPTyD+YdwYkvzaZX5XfyAvuyksCwYA1jWWnWPIziMjWJN6wC3AWxe\nj5/DHMxll/E6LLI51wbWqvwPEVGHbsxAfrJHmTbxchdNfOJZsL0tDBzHbbWHCYdb\naejFdkFUMtjGH4XUxiIU8T1rylo2wquVQIHee1FQ/1aV14kf6ZvZfLeaE5mTUGaI\nuVNuf+xAr40auNKvBZLB9y1qjwh+2TQfGAFX3O5wK4vLe66nZLomdagTHbz2ViQ2\nC8nWIvlMqJCjewDTDdm7Sty9CioCDZ07qfZK9mncdMOh9QSiw7AmUPGbd0PYvTaG\nr9OR/D2VAgMBAAECgf8Ig3aupzvHJCbnvsIF3zXtKaIFNozurxMniKCvOsrRO98l\n0Hy7D3omPR+AdHpltmY3KXmV1Y6XB3fKGtp2BZsewGhMXphCKAVk1oOvh2+pXZ+z\nGiQPcXYQ/7xtL4UF5nKjLLXN2c+J2m2GDI/RYM6hssCNEHyavct8XJPmb6soyyHO\nX6yo+LzqnadOER2cMc7ehqdl5rcDjUA2xQFonUskJORK4z6w+VQpQCREBMxNp/l8\ne8odT74wI8kzp+hJlBQ9KfGc8q243SonHVjSXTJAA96PMNCRIvqAQsrdN0fQyuTZ\n3g1TYvRYt7d++hi7ZSMpeRHKQeEcHrMxmrkSThkCgYEA/dlTPPwlRw9n/RLvNuiI\ntCRcVAwmx3icEPL7ZLLPrNRC+gRQ5GNhNIWCWROtltOiLD1Rd5JGpzRdtxVjiMdS\nBDmxdlQVE8UKRp84iJJ214Akyhx1aLLe8eFYYouYnMOg1M7cKEASWjUmzIHYa6rn\nxIjzdD5TbqZzcbSm87+NHCkCgYEAwkPfNuYHENq989Ozb+a1yW+Mud8vwciF3OWK\nWgPrPG8hVtgQCC2QyVAVkB2MPj3eQb8DEHJzf5r2VWB4xUUN2VbKApbu+pQ4u3nV\ngnLOjLbC/5y4kgBYFetiIDiRpj8FMv2kW5AQCib87mggXPJeOo99GV0yOBFu5fR4\ne6hdQ40CgYEA7Vczn1J1HCKIbLM2XBVAM4XHmYGfBGN9L8+vQrB4wbPYR2CfrVpJ\nuUyW2egvJlULTOer8useChlJAfQKkwkhYvf6N5NX/Zr+B5e4yOCAIu8Z9qpzEAgl\nsOursr+oWfICvtYGO8/kGNmXRCCnE8vAVR5i2a2oXk1cpNRuQHo5WjkCgYEAiKut\nb3cXw4DRIKhw1iou/J+xFtdxRtknbEhFNJ0LM0JP50Qsy0QbV7Yy5WgUUXm/Uuvq\nYPjUTxMbeOddMBQr8RsBFh9P1BTRcPv+/T5+GDtAJwsAQx9g2VL3fwmtVpOBueT+\na7iHwEy7p5K0KhANwQ9QCLcrbIy/Q6Lh3MWPj8UCgYAaDcNS8rVqCUU9+hfY9psW\nlCRh/yn8Yd0W7Dw+6qyhJgNH375mtsEvnrdRbRJT0EkO+GS6Y6qMyl/sWdb4yIDc\n3FXTkgcFbbgMQLOmYKw5EbqisGwcimel/5aEs8XpRgNhPd2Wjc5EPTzSEuHZUxyU\n2JQ7IRTBZbrhzH7ElDJfuA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "doapp-bucket@arctic-marking-404007.iam.gserviceaccount.com",
+  "client_id": "101724546484842718776",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/doapp-bucket%40arctic-marking-404007.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

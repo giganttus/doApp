@@ -36,6 +36,7 @@ type IRepos interface {
 	// Restaurants - Support functions
 	RestaurantExists(string) bool
 	GetRestaurantByField(string, any) (models.Restaurants, error)
+	RestaurantUserRelation(int) bool
 
 	// Daily offers - Main functions
 	CreateDailyOffer(models.DailyOffers) error
@@ -44,7 +45,6 @@ type IRepos interface {
 	DeleteDailyOffer(int) error
 
 	// Daily offers - Support functions
-	// DailyOfferExists(time.Time) bool
 	DailyOfferExists(string, int) bool
 	GetDailyOfferByField(string, any) (models.DailyOffers, error)
 }

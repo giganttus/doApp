@@ -6,6 +6,9 @@ import (
 	"doApp/repos"
 	"doApp/services"
 
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -13,6 +16,7 @@ import (
 func InitRoutes(db *gorm.DB) *gin.Engine {
 	router := gin.Default()
 	router.Use(middlewares.CorsMiddleware())
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	rep := repos.NewRepos(db)
 	svc := services.NewServices(rep)
