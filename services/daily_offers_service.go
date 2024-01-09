@@ -11,7 +11,7 @@ import (
 func (s *Services) CreateDailyOffer(ctx *gin.Context) error {
 	userID := ctx.Keys["userID"].(int)
 
-	if (!s.Repos.AllowAccess(userID, "admin")) && (!s.Repos.AllowAccess(userID, "moderator")) {
+	if (s.Repos.AllowAccess(userID, "admin") == false) || (s.Repos.AllowAccess(userID, "moderator") == false) {
 		return helpers.ErrService
 	}
 
