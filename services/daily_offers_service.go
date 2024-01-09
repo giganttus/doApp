@@ -11,7 +11,9 @@ import (
 func (s *Services) CreateDailyOffer(ctx *gin.Context) error {
 	userID := ctx.Keys["userID"].(int)
 
-  if (!s.Repos.AllowAccess(userID, "admin")) || (!s.Repos.AllowAccess(userID, "moderator")) {
+	if (!s.Repos.AllowAccess(userID, "admin")) && (!s.Repos.AllowAccess(userID, "moderator")) {
+		return helpers.ErrService
+	}
 
 	restaurant, err := s.Repos.GetRestaurantByField("users_id", userID)
 	if err != nil {
@@ -44,6 +46,10 @@ func (s *Services) GetDailyOffers(ctx *gin.Context) ([]models.DailyOffers, error
 func (s *Services) GetDailyOffer(ctx *gin.Context) (models.DailyOffers, error) {
 	userID := ctx.Keys["userID"].(int)
 
+	if (!s.Repos.AllowAccess(userID, "admin")) && (!s.Repos.AllowAccess(userID, "moderator")) {
+		return models.DailyOffers{}, helpers.ErrService
+	}
+
 	restaurant, err := s.Repos.GetRestaurantByField("users_id", userID)
 	if err != nil {
 		return models.DailyOffers{}, helpers.ErrService
@@ -59,7 +65,10 @@ func (s *Services) GetDailyOfferByRestaurantID(ctx *gin.Context, restaurantID in
 func (s *Services) DeleteDailyOffer(ctx *gin.Context, dailyOfferID int) error {
 	userID := ctx.Keys["userID"].(int)
 
-	if (!s.Repos.AllowAccess(userID, "admin")) || (!s.Repos.AllowAccess(userID, "moderator")) {
+	if (!s.Repos.AllowAccess(userID, "admin")) && (!s.Repos.AllowAccess(userID, "moderator")) {
+		return helpers.ErrService
+	}
+
 	dailyOffer, err := s.Repos.GetDailyOfferByField("id", dailyOfferID)
 	if err != nil {
 		return helpers.ErrService
