@@ -59,9 +59,3 @@ func (r *Repos) RestaurantExists(name string) bool {
 
 	return res != 0
 }
-
-func (r *Repos) RestaurantUserRelation(usersID int) bool {
-	res := r.db.Where("users_id = ?", usersID).First(&models.Restaurants{}).RowsAffected
-
-	return res != 0
-}
