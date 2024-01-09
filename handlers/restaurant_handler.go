@@ -91,7 +91,7 @@ func (h *Handlers) UpdateRestaurant(ctx *gin.Context) {
 		return
 	}
 
-	err := h.Services.UpdateRestaurant(ctx, upResta)
+	err := h.Services.UpdateRestaurants(ctx, upResta)
 	if err != nil {
 		if err.Error() == helpers.ErrForbidden.Error() {
 			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
