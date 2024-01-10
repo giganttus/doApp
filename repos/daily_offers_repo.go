@@ -4,6 +4,7 @@ import (
 	"doApp/helpers"
 	"doApp/models"
 	"fmt"
+	"time"
 )
 
 // Main functions
@@ -15,7 +16,7 @@ func (r *Repos) CreateDailyOffer(input models.DailyOffers) error {
 	return nil
 }
 
-func (r *Repos) GetDailyOffers() ([]models.DailyOffers, error) {
+func (r *Repos) GetDailyOffers(currentDate string) ([]models.DailyOffers, error) {
 	var dailyOffers []models.DailyOffers
 
 	if res := r.db.Find(&dailyOffers); res.Error != nil {
@@ -25,10 +26,10 @@ func (r *Repos) GetDailyOffers() ([]models.DailyOffers, error) {
 	return dailyOffers, nil
 }
 
-func (r *Repos) GetDailyOffer(restaurantID int) (models.DailyOffers, error) {
+func (r *Repos) GetDailyOffer(restaurantID int, currentDate string) (models.DailyOffers, error) {
 	var dailyOffer models.DailyOffers
 
-	if err := r.db.Where("restaurants_id = ?", restaurantID).First(&dailyOffer).Error; err != nil {
+	if err := r.db.Where("restaurants_id = ? AND date = ?", restaurantID, currentDate).First(&dailyOffer).Error; err != nil {
 		return dailyOffer, helpers.ErrRepo
 	}
 
@@ -49,6 +50,17 @@ func (r *Repos) GetDailyOfferByField(field string, value any) (models.DailyOffer
 	var dailyOffers models.DailyOffers
 
 	if err := r.db.Where(fmt.Sprintf("%v = ?", field), value).First(&dailyOffers).Error; err != nil {
+		return dailyOffers, helpers.ErrRepo
+	}
+
+	return dailyOffers, nil
+}
+
+func (r *Repos) GetDailyOfferByFieldAndCurrentDate(field string, value any) (models.DailyOffers, error) {
+	var dailyOffers models.DailyOffers
+	currentDate := time.Now().Format("2006-01-02")
+
+	if err := r.db.Where(fmt.Sprintf("%v = ? AND date = ? ", field), value, currentDate).First(&dailyOffers).Error; err != nil {
 		return dailyOffers, helpers.ErrRepo
 	}
 

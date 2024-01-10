@@ -11,7 +11,7 @@ import (
 func (s *Services) CreateDailyOffer(ctx *gin.Context) error {
 	userID := ctx.Keys["userID"].(int)
 
-	if (s.Repos.AllowAccess(userID, "admin") == false) || (s.Repos.AllowAccess(userID, "moderator") == false) {
+	if (!s.Repos.AllowAccess(userID, "admin")) && (!s.Repos.AllowAccess(userID, "moderator")) {
 		return helpers.ErrService
 	}
 
@@ -40,7 +40,9 @@ func (s *Services) CreateDailyOffer(ctx *gin.Context) error {
 }
 
 func (s *Services) GetDailyOffers(ctx *gin.Context) ([]models.DailyOffers, error) {
-	return s.Repos.GetDailyOffers()
+	currentDate := time.Now().Format("2006-01-02")
+
+	return s.Repos.GetDailyOffers(currentDate)
 }
 
 func (s *Services) GetDailyOffer(ctx *gin.Context) (models.DailyOffers, error) {
@@ -55,11 +57,13 @@ func (s *Services) GetDailyOffer(ctx *gin.Context) (models.DailyOffers, error) {
 		return models.DailyOffers{}, helpers.ErrService
 	}
 
-	return s.Repos.GetDailyOffer(restaurant.ID)
+	currentDate := time.Now().Format("2006-01-02")
+
+	return s.Repos.GetDailyOffer(restaurant.ID, currentDate)
 }
 
 func (s *Services) GetDailyOfferByRestaurantID(ctx *gin.Context, restaurantID int) (models.DailyOffers, error) {
-	return s.Repos.GetDailyOfferByField("restaurants_id", restaurantID)
+	return s.Repos.GetDailyOfferByFieldAndCurrentDate("restaurants_id", restaurantID)
 }
 
 func (s *Services) DeleteDailyOffer(ctx *gin.Context, dailyOfferID int) error {
@@ -69,12 +73,13 @@ func (s *Services) DeleteDailyOffer(ctx *gin.Context, dailyOfferID int) error {
 		return helpers.ErrService
 	}
 
+	currentDate := time.Now().Format("2006-01-02")
+
 	dailyOffer, err := s.Repos.GetDailyOfferByField("id", dailyOfferID)
 	if err != nil {
 		return helpers.ErrService
 	}
 
-	currentDate := time.Now().Format("2006-01-02")
 	if err = helpers.DeleteFile(ctx, dailyOffer.RestaurantsID, currentDate); err != nil {
 		return helpers.ErrService
 	}

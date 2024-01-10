@@ -73,7 +73,7 @@ const docTemplate = `{
             "post": {
                 "description": "Create new daily offer",
                 "consumes": [
-                    "application/json"
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "application/json"
@@ -88,6 +88,13 @@ const docTemplate = `{
                         "description": "JWT Token for Auth",
                         "name": "Authorization",
                         "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "file",
+                        "description": "this is a test file",
+                        "name": "file",
+                        "in": "formData",
                         "required": true
                     }
                 ],
@@ -126,7 +133,7 @@ const docTemplate = `{
             }
         },
         "/dailyOffer/{id}": {
-            "get": {
+            "delete": {
                 "description": "Delet daily offer by offer id",
                 "tags": [
                     "Daily Offer"
@@ -138,6 +145,13 @@ const docTemplate = `{
                         "description": "JWT Token for Auth",
                         "name": "Authorization",
                         "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Daily Offer ID",
+                        "name": "id",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -191,6 +205,13 @@ const docTemplate = `{
                         "description": "JWT Token for Auth",
                         "name": "Authorization",
                         "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Restaurant ID",
+                        "name": "restaurantId",
+                        "in": "path",
                         "required": true
                     }
                 ],
@@ -589,6 +610,13 @@ const docTemplate = `{
                         "description": "JWT Token for Auth",
                         "name": "Authorization",
                         "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Restaurant ID",
+                        "name": "id",
+                        "in": "path",
                         "required": true
                     }
                 ],

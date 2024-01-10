@@ -91,7 +91,7 @@ func (h *Handlers) UpdateRestaurant(ctx *gin.Context) {
 		return
 	}
 
-	err := h.Services.UpdateRestaurants(ctx, upResta)
+	err := h.Services.UpdateRestaurant(ctx, upResta)
 	if err != nil {
 		if err.Error() == helpers.ErrForbidden.Error() {
 			ctx.IndentedJSON(http.StatusForbidden, gin.H{"response": err.Error()})
@@ -110,6 +110,7 @@ func (h *Handlers) UpdateRestaurant(ctx *gin.Context) {
 // @Description  	Delete existing restuarant by id
 // @Tags         	Restaurant
 // @Param		 	Authorization header string true "JWT Token for Auth"
+// @Param 			id path string true "Restaurant ID"
 // @Success      	200  {array}  models.Users
 // @Failure      	401  {object} helpers.ResponseBody
 // @Failure      	403  {object} helpers.ResponseBody

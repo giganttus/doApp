@@ -123,7 +123,7 @@ paths:
       - Daily Offer
     post:
       consumes:
-      - application/json
+      - multipart/form-data
       description: Create new daily offer
       parameters:
       - description: JWT Token for Auth
@@ -131,6 +131,11 @@ paths:
         name: Authorization
         required: true
         type: string
+      - description: this is a test file
+        in: formData
+        name: file
+        required: true
+        type: file
       produces:
       - application/json
       responses:
@@ -158,12 +163,17 @@ paths:
       tags:
       - Daily Offer
   /dailyOffer/{id}:
-    get:
+    delete:
       description: Delet daily offer by offer id
       parameters:
       - description: JWT Token for Auth
         in: header
         name: Authorization
+        required: true
+        type: string
+      - description: Daily Offer ID
+        in: path
+        name: id
         required: true
         type: string
       responses:
@@ -199,6 +209,11 @@ paths:
       - description: JWT Token for Auth
         in: header
         name: Authorization
+        required: true
+        type: string
+      - description: Restaurant ID
+        in: path
+        name: restaurantId
         required: true
         type: string
       responses:
@@ -462,6 +477,11 @@ paths:
       - description: JWT Token for Auth
         in: header
         name: Authorization
+        required: true
+        type: string
+      - description: Restaurant ID
+        in: path
+        name: id
         required: true
         type: string
       responses:
