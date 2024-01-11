@@ -31,13 +31,15 @@ func InitRoutes(db *gorm.DB) *gin.Engine {
 	noAuthRouter.POST("register", hlr.CreateUser)
 	noAuthRouter.POST("login", hlr.Login)
 
+	// Restaurant
+	noAuthRouter.GET("restaurant", hlr.GetRestaurants)
+
 	// Routes w Auth
 	// Users
 	authRouter.GET("users", hlr.GetUsers)
 
 	// Restaurants
 	authRouter.POST("restaurant", hlr.CreateRestaurant)
-	authRouter.GET("restaurant", hlr.GetRestaurants)
 	authRouter.PUT("restaurant", hlr.UpdateRestaurant)
 	authRouter.DELETE("restaurant/:id", hlr.DeleteRestaurant)
 

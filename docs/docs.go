@@ -428,15 +428,6 @@ const docTemplate = `{
                     "Restaurant"
                 ],
                 "summary": "Get Restaurants",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "JWT Token for Auth",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",
