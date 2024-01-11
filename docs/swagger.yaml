@@ -356,12 +356,6 @@ paths:
   /restaurant:
     get:
       description: Get list of all restaurants
-      parameters:
-      - description: JWT Token for Auth
-        in: header
-        name: Authorization
-        required: true
-        type: string
       responses:
         "200":
           description: OK

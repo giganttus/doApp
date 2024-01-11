@@ -19,7 +19,7 @@ func (r *Repos) CreateDailyOffer(input models.DailyOffers) error {
 func (r *Repos) GetDailyOffers(currentDate string) ([]models.DailyOffers, error) {
 	var dailyOffers []models.DailyOffers
 
-	if res := r.db.Find(&dailyOffers); res.Error != nil {
+	if res := r.db.Where("date = ?", currentDate).Find(&dailyOffers); res.Error != nil {
 		return nil, helpers.ErrRepo
 	}
 

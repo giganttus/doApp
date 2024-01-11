@@ -49,7 +49,6 @@ func (h *Handlers) CreateRestaurant(ctx *gin.Context) {
 // @Summary      	Get Restaurants
 // @Description  	Get list of all restaurants
 // @Tags         	Restaurant
-// @Param		 	Authorization header string true "JWT Token for Auth"
 // @Success      	200  {array}  models.Users
 // @Failure      	401  {object} helpers.ResponseBody
 // @Failure      	403  {object} helpers.ResponseBody
